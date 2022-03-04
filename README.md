@@ -11,4 +11,9 @@ $ yarn dev
 
 ```
 
+## Feature
+- List food
+- Add food to cart
+- Show cart
+
 
