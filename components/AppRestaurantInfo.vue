@@ -1,47 +1,49 @@
 <template>
   <section class="restaurantinfo">
-    <div v-for="store in fooddata" :key="store.id">
-        <h2>{{store.name}}</h2>
-        <p>Delivery Time {{store.deliveryTime}}</p>
-        <p>Rating {{store.rating}}</p>
-        <p v-if="store.freeDelivery" class="label">
-            <span>Free Delivery</span>
-        </p>
+    <div v-for="store in datasource" :key="store.id">
+      <h2>{{ store.name }}</h2>
+      <p>Delivery Time {{ store.deliveryTime }}</p>
+      <p>Rating {{ store.rating }}</p>
+      <p v-if="store.freeDelivery" class="label">
+        <span>Free Delivery</span>
+      </p>
 
-        <div class="row">
-            <div
-                v-for="menuitem in store.menu"
-                :key="menuitem.id"
-                class="items"
-                :style="`background: url(${menuitem.img}) no-repeat center center`"
-            >
+      <div class="row">
+        <div
+          v-for="menuitem in store.menu"
+          :key="menuitem.id"
+          class="items"
+          :style="`background: url(${menuitem.img}) no-repeat center center`"
+        >
+          <div class="iteminfo">
+            <div>
+              <h4>{{ menuitem.item }}</h4>
+              <p>{{ priceFormatting(menuitem.price) }}</p>
+            </div>
 
-            <div class="iteminfo">
-                <div>
-                    <h4>{{menuitem.item}}</h4>
-                    <p>{{priceFormatting(menuitem.price)}}</p>
-                </div>
-                <button class="ghost">View Item ></button>
-            </div>
-            </div>
+            <nuxt-link :to="`/items/${menuitem.id}`">
+              <button class="ghost">View Item ></button>
+            </nuxt-link>
+          </div>
         </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
-  computed: {
-    ...mapState(["fooddata"]),
+  props: {
+    datasource: {
+      type: [Array, Object],
+    },
   },
 
-  methods:{
-      priceFormatting(price){
-          return "$" + price.toFixed(2)
-      }
-  }
+  methods: {
+    priceFormatting(price) {
+      return "$" + price.toFixed(2);
+    },
+  },
 };
 </script>
 
