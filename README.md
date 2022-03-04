@@ -11,6 +11,11 @@ $ yarn dev
 
 ```
 
+
+## Technical use
+- Vue
+- Nuxt
+
 ## Feature
 - List food
 - Add food to cart
