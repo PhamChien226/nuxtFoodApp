@@ -26,7 +26,7 @@
             name="option"
             :value="option"
             :id="option"
-            v-model="itemOptions"
+            v-model="$v.itemOptions.$model"
           />
 
           <label :key="option">{{ option }}</label>
@@ -43,7 +43,7 @@
             name="addon"
             :value="addon"
             :id="addon"
-            v-model="itemAddons"
+            v-model="$v.itemAddons.$model"
           />
 
           <label :key="addon">{{ addon }}</label>
@@ -53,6 +53,11 @@
       <AppToast v-if="cartSubmitted">
         Order Submitted <br />
         Check out more <nuxt-link to="/restaurants">restaurants</nuxt-link>!
+      </AppToast>
+
+      <AppToast v-if="errors">
+        Please select options and
+        <br />addons before continuing
       </AppToast>
     </section>
 
@@ -66,6 +71,7 @@
 <script>
 import { mapState } from "vuex";
 import AppToast from "@/components/AppToast.vue";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   components: {
@@ -80,8 +86,19 @@ export default {
       itemAddons: [],
       itemSizeAndCost: [],
       cartSubmitted: false,
+      errors:false
     };
   },
+
+  validations: {
+    itemOptions: {
+      required,
+    },
+    itemAddons: {
+      required,
+    },
+  },
+
   computed: {
     ...mapState(["fooddata"]),
     currentItem() {
@@ -114,8 +131,18 @@ export default {
         addOns: this.itemAddons,
         combinedPrice: this.combinedPrice,
       };
-      this.cartSubmitted = true;
-      this.$store.commit("addToCart", formOutput);
+      let addOnError = this.$v.itemAddons.$invalid;
+      let optionError = this.currentItem.options
+        ? this.$v.itemOptions.$invalid
+        : false;
+
+      if (addOnError || optionError) {
+        this.errors = true;
+      } else {
+        this.errors = false;
+        this.cartSubmitted = true;
+        this.$store.commit("addToCart", formOutput);
+      }
     },
   },
 };
