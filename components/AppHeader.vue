@@ -2,9 +2,13 @@
   <div>
     <section class="masthead" role="img" aria-label="Image Description">
       <h1>Nuxt Food App</h1>
-      <button @click="test">
-        <a id="facebook" title="  See restaurants 123>" target="_blank"> </a>
-      </button>
+      <!-- <button @click="test"> -->
+      <a id="facebook" href="fb://" title="See restaurants 123>"
+        >Open FB Profile
+      </a>
+      <!-- <a target="_blank" href="https://www.facebook.com/LCKTiengViet">Link</a> -->
+
+      <!-- </button> -->
     </section>
   </div>
 </template>
@@ -14,12 +18,13 @@ export default {
   methods: {
     test() {
       console.log("test....");
-      const facebookBtn = document.getElementById("facebook");
-      facebookBtn.href = "fb://phamchien2222";
-      setTimeout(() => {
-        console.log("this...", this);
-        // this.getURL(this);
-      }, 25);
+      console.log("navigator", navigator.share());
+      // const facebookBtn = document.getElementById("facebook");
+      // facebookBtn.href = "fb://phamchien2222";
+      // setTimeout(() => {
+      //   console.log("this...", this);
+      //   // this.getURL(this);
+      // }, 25);
     },
 
     openFacebook(e) {
@@ -46,7 +51,10 @@ export default {
 
     getURL(vm) {
       console.log("get url");
-       return vm.location.href("https://www.facebook.com/LCKTiengViet", "_blank");
+      return vm.location.href(
+        "https://www.facebook.com/LCKTiengViet",
+        "_blank"
+      );
     },
   },
 };
