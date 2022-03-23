@@ -12,12 +12,20 @@
       <!-- <a target="_blank" href="https://www.facebook.com/LCKTiengViet">Link</a> -->
 
       <!-- </button> -->
+      <br/>
+      <p>{{success}}</p>
+      <button id="share" @click="share">navigator share</button>
     </section>
   </div>
 </template>
 
 <script>
 export default {
+  data(){
+    return {
+      success:false,
+    }
+  },
   methods: {
     test() {
       console.log("test....");
@@ -28,6 +36,37 @@ export default {
       //   console.log("this...", this);
       //   // this.getURL(this);
       // }, 25);
+    },
+
+    async share() {
+      const shareData = {
+        title: "MDN",
+        text: "Learn web development on MDN!",
+        url: "https://developer.mozilla.org",
+      };
+
+      const btn = document.getElementById("share");
+      const resultPara = document.querySelector(".result");
+
+      // Share must be triggered by "user activation"
+      btn.addEventListener("click", async () => {
+        try {
+          console.log("check")
+          console.log("Navigator.canShare()",Navigator.canShare())
+          if(Navigator.canShare()){
+            await navigator.share(shareData);
+          }
+          else{
+            alert("can't share")
+          }
+          // resultPara.textContent = "MDN shared successfully";
+          this.success = true
+        } catch (err) {
+          this.success = false
+          console.log('err',err)
+          // resultPara.textContent = "Error: " + err;
+        }
+      });
     },
 
     openFacebook(e) {
