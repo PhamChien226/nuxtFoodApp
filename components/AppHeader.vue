@@ -6,6 +6,9 @@
       <a id="facebook" href="fb://" title="See restaurants 123>"
         >Open FB Profile
       </a>
+      <a id="facebook" href="zalo://" title="See restaurants 123>"
+        >Open Zalo
+      </a>
       <!-- <a target="_blank" href="https://www.facebook.com/LCKTiengViet">Link</a> -->
 
       <!-- </button> -->
