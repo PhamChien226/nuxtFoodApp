@@ -15,7 +15,7 @@ export default {
     test() {
       console.log("test....");
       const facebookBtn = document.getElementById("facebook");
-      facebookBtn.href = "fb://profile/phamchien2222";
+      facebookBtn.href = "fb://phamchien2222";
       setTimeout(() => {
         console.log("this...", this);
         // this.getURL(this);
