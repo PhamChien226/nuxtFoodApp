@@ -2,20 +2,61 @@
   <div>
     <section class="masthead" role="img" aria-label="Image Description">
       <h1>Nuxt Food App</h1>
-      <button>See restaurants ></button>
+      <button @click="test">
+        <a id="facebook" title="  See restaurants 123>" target="_blank"> </a>
+      </button>
     </section>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    test() {
+      console.log("test....");
+      const facebookBtn = document.getElementById("facebook");
+      facebookBtn.href = "fb://profile/phamchien2222";
+      setTimeout(() => {
+        console.log("this...", this);
+        // this.getURL(this);
+      }, 25);
+    },
+
+    openFacebook(e) {
+      // const IS_IOS =
+      //   navigator.userAgent.match(/iPad/i) != null ||
+      //   navigator.userAgent.match(/iPhone/i) != null ||
+      //   navigator.userAgent.match(/iPod/i) != null;
+      // const IS_ANDROID =
+      //   navigator.userAgent.match(/android/i) != null ||
+      //   navigator.userAgent.match(/Android/i) != null;
+      // if (IS_IOS) {
+      //   setTimeout(function () {
+      //     getURL();
+      //   }, 25);¡¡™£¢¡™™¡™£¢¡™£¢
+      //   this.FacebookBtn.href = "fb://profile/phamchien2222";
+      // } else if (IS_ANDROID) {
+      //   setTimeout(function () {
+      //     getURL();
+      //   }, 25);
+      //   this.FacebookBtn.href = "fb://profile/phamchien2222";
+      // }
+      // e.stopPropagation();
+    },
+
+    getURL(vm) {
+      console.log("get url");
+       return vm.location.href("https://www.facebook.com/LCKTiengViet", "_blank");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .masthead {
   width: 100%;
-  height: 80vh; 
-  padding:40px;
+  height: 80vh;
+  padding: 40px;
   overflow: hidden;
   background-size: cover !important;
   background: radial-gradient(

@@ -1,7 +1,7 @@
 <template>
   <main class="container">
     <AppHeader />
-    <AppRestaurantInfo :datasource="fooddata"/>
+    <AppRestaurantInfo :datasource="fooddata" />
   </main>
 </template>
 

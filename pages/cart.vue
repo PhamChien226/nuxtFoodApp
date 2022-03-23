@@ -32,17 +32,17 @@
       </tbody>
     </table>
 
-    <AppEmptyCart v-else/>
+    <AppEmptyCart v-else />
   </main>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import AppEmptyCart from '@/components/AppEmptyCart.vue';
+import AppEmptyCart from "@/components/AppEmptyCart.vue";
 
 export default {
   components: {
-    AppEmptyCart
+    AppEmptyCart,
   },
   computed: {
     ...mapState(["cart"]),
@@ -51,5 +51,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
