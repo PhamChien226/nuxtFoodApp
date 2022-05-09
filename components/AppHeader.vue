@@ -43,27 +43,32 @@ export default {
       const File_Name = "testing_image";
       //step to request a file system
 
-      document.addEventListener(
-        "deviceready",
-        function () {
-          // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, success, error);
-          window.requestFileSystem(
-            LocalFileSystem.PERSISTENT,
-            0,
-            fileSystemSuccess,
-            fileSystemFail
-          );
-        },
-        false
-      );
+      try {
+        document.addEventListener(
+          "deviceready",
+          function () {
+            alert("it's ready....");
+            // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, success, error);
+            window.requestFileSystem(
+              LocalFileSystem.PERSISTENT,
+              0,
+              fileSystemSuccess,
+              fileSystemFail
+            );
+          },
+          false
+        );
+      } catch (error) {
+      alert("error",error);  
+      }
 
-      alert("after");
+      // alert("after");
 
       // alert("after")
 
       function fileSystemSuccess(fileSystem) {
         // alert("fileSystem", fileSystem);
-        alert("filesystem..")
+        alert("success..");
         var download_link = encodeURI(URL);
         ext = download_link.substr(download_link.lastIndexOf(".") + 1); //Get extension of URL
 
@@ -83,10 +88,12 @@ export default {
       }
 
       function onDirectorySuccess(parent) {
+        alert("dic success..");
         // Directory created successfuly
       }
 
       function onDirectoryFail(error) {
+        alert("do fail..");
         //Error while creating directory
         alert("Unable to create new directory: " + error.code);
       }
@@ -98,6 +105,7 @@ export default {
       }
 
       function filetransfer(download_link, fp) {
+        console.log("filetransfer")
         var fileTransfer = new FileTransfer();
         // File download function with URL and local path
         fileTransfer.download(
