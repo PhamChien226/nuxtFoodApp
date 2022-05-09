@@ -37,22 +37,33 @@ export default {
     },
 
     download() {
+      // try {
       const URL = "./mac.png";
       const Folder_Name = "myFileName";
       const File_Name = "testing_image";
       //step to request a file system
-      const abc = window.requestFileSystem(
-        LocalFileSystem.PERSISTENT,
-        0,
-        fileSystemSuccess,
-        fileSystemFail
+
+      document.addEventListener(
+        "deviceready",
+        function () {
+          // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, success, error);
+          window.requestFileSystem(
+            LocalFileSystem.PERSISTENT,
+            0,
+            fileSystemSuccess,
+            fileSystemFail
+          );
+        },
+        false
       );
-      alert("after",abc)
+
+      alert("after");
 
       // alert("after")
 
       function fileSystemSuccess(fileSystem) {
-        alert("fileSystem",fileSystem)
+        // alert("fileSystem", fileSystem);
+        alert("filesystem..")
         var download_link = encodeURI(URL);
         ext = download_link.substr(download_link.lastIndexOf(".") + 1); //Get extension of URL
 
@@ -82,7 +93,7 @@ export default {
 
       function fileSystemFail(evt) {
         //Unable to access file system
-        console.log("fail....")
+        console.log("fail....");
         alert(evt.target.error.code);
       }
 
@@ -103,6 +114,9 @@ export default {
           }
         );
       }
+      // } catch (error) {
+      //   alert("error", error);
+      // }
     },
 
     // success(fileSystem) {
