@@ -2,7 +2,7 @@
   <div>
     <section class="masthead" role="img" aria-label="Image Description">
       <h1>Nuxt Food App</h1>
-      <button @click="saveImage">Save image</button>
+      <button @click="saveWay2">Save image</button>
       <!-- <a id="facebook" href="fb://" title="See restaurants 123>"
         >Open FB Profile
       </a>
@@ -12,6 +12,7 @@
       <!-- <a target="_blank" href="https://www.facebook.com/LCKTiengViet">Link</a> -->
 
       <!-- </button> -->
+      <img id="image" src="./mac.png" />
       <canvas id="filtercanvas" width="250" height="333"></canvas>
       <br />
       <p>{{ success }}</p>
@@ -32,100 +33,139 @@ export default {
     };
   },
   methods: {
-    saveImage() {
-      this.download();
+    // way 2
+    saveWay2() {
+      alert("listent...")
+      document.addEventListener("deviceready", this.onDeviceReady, false);
     },
 
-    download() {
-      // try {
-      const URL = "./mac.png";
-      const Folder_Name = "myFileName";
-      const File_Name = "testing_image";
-      //step to request a file system
-
-      try {
-        document.addEventListener(
-          "deviceready",
-          function () {
-            alert("it's ready....");
-            // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, success, error);
-            window.requestFileSystem(
-              LocalFileSystem.PERSISTENT,
-              0,
-              fileSystemSuccess,
-              fileSystemFail
-            );
-          },
-          false
-        );
-      } catch (error) {
-      alert("error",error);  
-      }
-
-      // alert("after");
-
-      // alert("after")
-
-      function fileSystemSuccess(fileSystem) {
-        // alert("fileSystem", fileSystem);
-        alert("success..");
-        var download_link = encodeURI(URL);
-        ext = download_link.substr(download_link.lastIndexOf(".") + 1); //Get extension of URL
-
-        var directoryEntry = fileSystem.root; // to get root path of directory
-        directoryEntry.getDirectory(
-          Folder_Name,
-          { create: true, exclusive: false },
-          onDirectorySuccess,
-          onDirectoryFail
-        ); // creating folder in sdcard
-        var rootdir = fileSystem.root;
-        var fp = rootdir.fullPath; // Returns Fulpath of local directory
-
-        fp = fp + "/" + Folder_Name + "/" + File_Name + "." + ext; // fullpath and name of the file which we want to give
-        // download function call
-        filetransfer(download_link, fp);
-      }
-
-      function onDirectorySuccess(parent) {
-        alert("dic success..");
-        // Directory created successfuly
-      }
-
-      function onDirectoryFail(error) {
-        alert("do fail..");
-        //Error while creating directory
-        alert("Unable to create new directory: " + error.code);
-      }
-
-      function fileSystemFail(evt) {
-        //Unable to access file system
-        console.log("fail....");
-        alert(evt.target.error.code);
-      }
-
-      function filetransfer(download_link, fp) {
-        console.log("filetransfer")
-        var fileTransfer = new FileTransfer();
-        // File download function with URL and local path
-        fileTransfer.download(
-          download_link,
-          fp,
-          function (entry) {
-            alert("download complete: " + entry.fullPath);
-          },
-          function (error) {
-            //Download abort errors or download failed errors
-            alert("download error source " + error.source);
-            //alert("download error target " + error.target);
-            //alert("upload error code" + error.code);
-          }
-        );
-      }
-      // } catch (error) {
-      //   alert("error", error);
-      // }
+    onDeviceReady() {
+      window.requestFileSystem(
+        LocalFileSystem.PERSISTENT,
+        0,
+        this.gotFS,
+        this.fail
+      );
     },
+
+    gotFS(fileSystem) {
+      fileSystem.root.getFile(
+        "pic.jpg",
+        { create: true, exclusive: false },
+        this.gotFileEntry,
+        this.fail
+      );
+    },
+
+    gotFileEntry(fileEntry) {
+      fileEntry.createWriter(this.gotFileWriter, this.fail);
+    },
+
+    gotFileWriter(writer) {
+      var photo = document.getElementById("image");
+      writer.write(photo.value);
+    },
+
+    fail(error) {
+      console.log(error.code);
+    },
+    //end way 2
+
+    // way 1
+    // saveImage() {
+    //   this.download();
+    // },
+
+    // download() {
+    //   // try {
+    //   const URL = "./mac.png";
+    //   const Folder_Name = "myFileName";
+    //   const File_Name = "testing_image";
+    //   //step to request a file system
+
+    //   try {
+    //     document.addEventListener(
+    //       "deviceready",
+    //       function () {
+    //         alert("it's ready....");
+    //         // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, success, error);
+    //         window.requestFileSystem(
+    //           LocalFileSystem.PERSISTENT,
+    //           0,
+    //           fileSystemSuccess,
+    //           fileSystemFail
+    //         );
+    //       },
+    //       false
+    //     );
+    //   } catch (error) {
+    //     alert("error", error);
+    //   }
+
+    //   // alert("after");
+
+    //   // alert("after")
+
+    //   function fileSystemSuccess(fileSystem) {
+    //     // alert("fileSystem", fileSystem);
+    //     alert("success..");
+    //     var download_link = encodeURI(URL);
+    //     ext = download_link.substr(download_link.lastIndexOf(".") + 1); //Get extension of URL
+
+    //     var directoryEntry = fileSystem.root; // to get root path of directory
+    //     directoryEntry.getDirectory(
+    //       Folder_Name,
+    //       { create: true, exclusive: false },
+    //       onDirectorySuccess,
+    //       onDirectoryFail
+    //     ); // creating folder in sdcard
+    //     var rootdir = fileSystem.root;
+    //     var fp = rootdir.fullPath; // Returns Fulpath of local directory
+
+    //     fp = fp + "/" + Folder_Name + "/" + File_Name + "." + ext; // fullpath and name of the file which we want to give
+    //     // download function call
+    //     filetransfer(download_link, fp);
+    //   }
+
+    //   function onDirectorySuccess(parent) {
+    //     alert("dic success..");
+    //     // Directory created successfuly
+    //   }
+
+    //   function onDirectoryFail(error) {
+    //     alert("do fail..");
+    //     //Error while creating directory
+    //     alert("Unable to create new directory: " + error.code);
+    //   }
+
+    //   function fileSystemFail(evt) {
+    //     //Unable to access file system
+    //     console.log("fail....");
+    //     alert(evt.target.error.code);
+    //   }
+
+    //   function filetransfer(download_link, fp) {
+    //     console.log("filetransfer");
+    //     var fileTransfer = new FileTransfer();
+    //     // File download function with URL and local path
+    //     fileTransfer.download(
+    //       download_link,
+    //       fp,
+    //       function (entry) {
+    //         alert("download complete: " + entry.fullPath);
+    //       },
+    //       function (error) {
+    //         //Download abort errors or download failed errors
+    //         alert("download error source " + error.source);
+    //         //alert("download error target " + error.target);
+    //         //alert("upload error code" + error.code);
+    //       }
+    //     );
+    //   }
+    // } catch (error) {
+    //   alert("error", error);
+    // }
+    // },
 
     // success(fileSystem) {
     //   var fileTransfer = new FileTransfer();
@@ -152,144 +192,144 @@ export default {
     //   ),
     //   "cat.jpg"
     // ); // I just used a sample url and filename
+    // },
+
+    // test() {
+    // console.log("test....");
+    // console.log("navigator", navigator.share());
+    // const facebookBtn = document.getElementById("facebook");
+    // facebookBtn.href = "fb://phamchien2222";
+    // setTimeout(() => {
+    //   console.log("this...", this);
+    //   // this.getURL(this);
+    // }, 25);
+    // },
+
+    // async share() {
+    //   const shareData = {
+    //     title: "MDN",
+    //     text: "Learn web development on MDN!",
+    //     url: "https://developer.mozilla.org",
+    //   };
+
+    //   const btn = document.getElementById("share");
+    //   const resultPara = document.querySelector(".result");
+
+    //   // Share must be triggered by "user activation"
+    //   btn.addEventListener("click", async () => {
+    //     try {
+    //       console.log("check");
+    //       console.log("Navigator.canShare()", Navigator.canShare());
+    //       if (Navigator.canShare()) {
+    //         await navigator.share(shareData);
+    //       } else {
+    //         alert("can't share");
+    //       }
+    //       // resultPara.textContent = "MDN shared successfully";
+    //       this.success = true;
+    //     } catch (err) {
+    //       this.success = false;
+    //       console.log("err", err);
+    //       // resultPara.textContent = "Error: " + err;
+    //     }
+    //   });
+    // },
+
+    // openFacebook(e) {
+    // const IS_IOS =
+    //   navigator.userAgent.match(/iPad/i) != null ||
+    //   navigator.userAgent.match(/iPhone/i) != null ||
+    //   navigator.userAgent.match(/iPod/i) != null;
+    // const IS_ANDROID =
+    //   navigator.userAgent.match(/android/i) != null ||
+    //   navigator.userAgent.match(/Android/i) != null;
+    // if (IS_IOS) {
+    //   setTimeout(function () {
+    //     getURL();
+    //   }, 25);¡¡™£¢¡™™¡™£¢¡™£¢
+    //   this.FacebookBtn.href = "fb://profile/phamchien2222";
+    // } else if (IS_ANDROID) {
+    //   setTimeout(function () {
+    //     getURL();
+    //   }, 25);
+    //   this.FacebookBtn.href = "fb://profile/phamchien2222";
+    // }
+    // e.stopPropagation();
+    // },
+
+    // getURL(vm) {
+    //   console.log("get url");
+    //   return vm.location.href(
+    //     "https://www.facebook.com/LCKTiengViet",
+    //     "_blank"
+    //   );
+    // },
+
+    // grayscale(img) {},
+
+    // save_canvas() {
+    //   var img = new Image();
+    //   img.onload = function () {
+    //     // this.grayscale(img);
+
+    //     //  console.log("img...")
+    //     var canvas = document.getElementById("filtercanvas");
+    //     var ctx = canvas.getContext("2d");
+    //     ctx.drawImage(img, 0, 0);
+    //     // var img_data = ctx.getImageData(0, 0, img.width, img.height);
+    //     // var data = img_data.data;
+    //     // for (var i = 0; i < data.length; i += 4) {
+    //     //   var brightness =
+    //     //     0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+    //     //   data[i] = brightness;
+    //     //   data[i + 1] = brightness;
+    //     //   data[i + 2] = brightness;
+    //     // }
+
+    //     // ctx.putImageData(img_data, 0, 0);
+
+    //     var canvas = document.getElementById("filtercanvas");
+    //     var duri = canvas.toDataURL();
+    //     var data = duri.substr(duri.indexOf(",") + 1);
+
+    //     var onerror = function (err) {
+    //       console.log(err.name + " : " + err.message);
+    //     };
+    //     var onstream = function (stream) {
+    //       stream.writeBase64(data);
+    //       stream.close();
+    //     };
+
+    //     var onsuccess = function (dir) {
+    //       // var f = dir.createFile("face.png");
+    //       // f.openStream("w", onstream, onerror, "UTF-8");
+    //       // var onsuccess = function(dir) {
+    //       var f = dir.createFile("frm21.gif");
+    //       f.openStream(
+    //         "w",
+    //         function (stream) {
+    //           stream.writeBase64(data);
+    //           stream.close();
+    //           tizen.content.scanFile(f.toURI());
+    //         },
+    //         onerror,
+    //         "UTF-8"
+    //       );
+    //     };
+    //     // };
+
+    //     tizen.filesystem.resolve("images", onsuccess, onerror, "rw");
+    //   };
+    // img.src =
+    //   "https://dev-sellde-docs.s3.ap-southeast-1.amazonaws.com/thumbnail.png";
+    // img.src = "./mac.png";
+
+    // // var canvas = document.getElementById("filtercanvas");
+    // // var ctx = canvas.getContext("2d");
+    // let img = document.createElement("img");
+    // img.src = "./mac.png";
+    // },
   },
-
-  // test() {
-  // console.log("test....");
-  // console.log("navigator", navigator.share());
-  // const facebookBtn = document.getElementById("facebook");
-  // facebookBtn.href = "fb://phamchien2222";
-  // setTimeout(() => {
-  //   console.log("this...", this);
-  //   // this.getURL(this);
-  // }, 25);
-  // },
-
-  // async share() {
-  //   const shareData = {
-  //     title: "MDN",
-  //     text: "Learn web development on MDN!",
-  //     url: "https://developer.mozilla.org",
-  //   };
-
-  //   const btn = document.getElementById("share");
-  //   const resultPara = document.querySelector(".result");
-
-  //   // Share must be triggered by "user activation"
-  //   btn.addEventListener("click", async () => {
-  //     try {
-  //       console.log("check");
-  //       console.log("Navigator.canShare()", Navigator.canShare());
-  //       if (Navigator.canShare()) {
-  //         await navigator.share(shareData);
-  //       } else {
-  //         alert("can't share");
-  //       }
-  //       // resultPara.textContent = "MDN shared successfully";
-  //       this.success = true;
-  //     } catch (err) {
-  //       this.success = false;
-  //       console.log("err", err);
-  //       // resultPara.textContent = "Error: " + err;
-  //     }
-  //   });
-  // },
-
-  // openFacebook(e) {
-  // const IS_IOS =
-  //   navigator.userAgent.match(/iPad/i) != null ||
-  //   navigator.userAgent.match(/iPhone/i) != null ||
-  //   navigator.userAgent.match(/iPod/i) != null;
-  // const IS_ANDROID =
-  //   navigator.userAgent.match(/android/i) != null ||
-  //   navigator.userAgent.match(/Android/i) != null;
-  // if (IS_IOS) {
-  //   setTimeout(function () {
-  //     getURL();
-  //   }, 25);¡¡™£¢¡™™¡™£¢¡™£¢
-  //   this.FacebookBtn.href = "fb://profile/phamchien2222";
-  // } else if (IS_ANDROID) {
-  //   setTimeout(function () {
-  //     getURL();
-  //   }, 25);
-  //   this.FacebookBtn.href = "fb://profile/phamchien2222";
-  // }
-  // e.stopPropagation();
-  // },
-
-  // getURL(vm) {
-  //   console.log("get url");
-  //   return vm.location.href(
-  //     "https://www.facebook.com/LCKTiengViet",
-  //     "_blank"
-  //   );
-  // },
-
-  // grayscale(img) {},
-
-  // save_canvas() {
-  //   var img = new Image();
-  //   img.onload = function () {
-  //     // this.grayscale(img);
-
-  //     //  console.log("img...")
-  //     var canvas = document.getElementById("filtercanvas");
-  //     var ctx = canvas.getContext("2d");
-  //     ctx.drawImage(img, 0, 0);
-  //     // var img_data = ctx.getImageData(0, 0, img.width, img.height);
-  //     // var data = img_data.data;
-  //     // for (var i = 0; i < data.length; i += 4) {
-  //     //   var brightness =
-  //     //     0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
-  //     //   data[i] = brightness;
-  //     //   data[i + 1] = brightness;
-  //     //   data[i + 2] = brightness;
-  //     // }
-
-  //     // ctx.putImageData(img_data, 0, 0);
-
-  //     var canvas = document.getElementById("filtercanvas");
-  //     var duri = canvas.toDataURL();
-  //     var data = duri.substr(duri.indexOf(",") + 1);
-
-  //     var onerror = function (err) {
-  //       console.log(err.name + " : " + err.message);
-  //     };
-  //     var onstream = function (stream) {
-  //       stream.writeBase64(data);
-  //       stream.close();
-  //     };
-
-  //     var onsuccess = function (dir) {
-  //       // var f = dir.createFile("face.png");
-  //       // f.openStream("w", onstream, onerror, "UTF-8");
-  //       // var onsuccess = function(dir) {
-  //       var f = dir.createFile("frm21.gif");
-  //       f.openStream(
-  //         "w",
-  //         function (stream) {
-  //           stream.writeBase64(data);
-  //           stream.close();
-  //           tizen.content.scanFile(f.toURI());
-  //         },
-  //         onerror,
-  //         "UTF-8"
-  //       );
-  //     };
-  //     // };
-
-  //     tizen.filesystem.resolve("images", onsuccess, onerror, "rw");
-  //   };
-  // img.src =
-  //   "https://dev-sellde-docs.s3.ap-southeast-1.amazonaws.com/thumbnail.png";
-  // img.src = "./mac.png";
-
-  // // var canvas = document.getElementById("filtercanvas");
-  // // var ctx = canvas.getContext("2d");
-  // let img = document.createElement("img");
-  // img.src = "./mac.png";
-  // },
-  // },
 };
 </script>
 
