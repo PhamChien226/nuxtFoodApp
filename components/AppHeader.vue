@@ -2,7 +2,7 @@
   <div>
     <section class="masthead" role="img" aria-label="Image Description">
       <h1>Nuxt Food App</h1>
-      <button @click="save_canvas">Save image</button>
+      <button @click="saveImage">Save image</button>
       <!-- <a id="facebook" href="fb://" title="See restaurants 123>"
         >Open FB Profile
       </a>
@@ -38,17 +38,21 @@ export default {
 
     download() {
       const URL = "./mac.png";
-      const Folder_Name = "file:///storage/sdcard0";
+      const Folder_Name = "myFileName";
       const File_Name = "testing_image";
       //step to request a file system
-      window.requestFileSystem(
+      const abc = window.requestFileSystem(
         LocalFileSystem.PERSISTENT,
         0,
         fileSystemSuccess,
         fileSystemFail
       );
+      alert("after",abc)
+
+      // alert("after")
 
       function fileSystemSuccess(fileSystem) {
+        alert("fileSystem",fileSystem)
         var download_link = encodeURI(URL);
         ext = download_link.substr(download_link.lastIndexOf(".") + 1); //Get extension of URL
 
@@ -78,6 +82,7 @@ export default {
 
       function fileSystemFail(evt) {
         //Unable to access file system
+        console.log("fail....")
         alert(evt.target.error.code);
       }
 
