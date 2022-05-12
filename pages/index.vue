@@ -1,20 +1,21 @@
 <template>
   <main class="container">
     <!-- <AppHeader /> -->
-    <Lab />
+    <!-- <Lab /> -->
+    <Lab2 />
     <AppRestaurantInfo :datasource="fooddata" />
   </main>
 </template>
 
 <script>
 // import AppHeader from "@/components/AppHeader.vue";
-import Lab from "@/components/Lab.vue";
+import Lab2 from "@/components/Lab2.vue";
 import AppRestaurantInfo from "@/components/AppRestaurantInfo.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
-    Lab,
+    Lab2,
     AppRestaurantInfo,
   },
 

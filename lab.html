@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="long-press-event.js"></script>
+    <script>
+      document.addEventListener("long-press", function (e) {
+        console.log(e.target);
+      });
+    </script>
+  </head>
+  <body>
+    <div data-long-press-delay="500">Press and hold me for .5s</div>
+  </body>
+</html>
