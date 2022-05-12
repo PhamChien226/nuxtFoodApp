@@ -18,11 +18,11 @@ export default {
     },
 
     onTouchForceChange(e) {
-      console.log("e", e);
-      console.log("e.changedTouches", e.changedTouches);
-      console.log("e.changedTouches[0]", e.changedTouches[0]);
-      console.log("e.changedTouches[0].force", e.changedTouches[0].force);
-      console.log("run...");
+      alert("e", e);
+      alert("e.changedTouches", e.changedTouches);
+      alert("e.changedTouches[0]", e.changedTouches[0]);
+      alert("e.changedTouches[0].force", e.changedTouches[0].force);
+      alert("run...");
       if (e.changedTouches[0].force > 0.5) {
         e.preventDefault();
       }
