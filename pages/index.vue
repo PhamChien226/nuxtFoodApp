@@ -3,6 +3,7 @@
     <!-- <AppHeader /> -->
     <!-- <Lab /> -->
     <Lab2 />
+    <div>abc</div>
     <AppRestaurantInfo :datasource="fooddata" />
   </main>
 </template>
