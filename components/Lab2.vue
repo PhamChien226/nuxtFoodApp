@@ -2,14 +2,100 @@
   <div id="dialog-download-image-mobile">
     <!-- <img ref="image" src="./mac.png" />
     <pre>{{ $data }}</pre> -->
+    <button @click="onClickDialog">openDialog</button>
+    <a href="https://m.me/sellde.vn">messenger desktop test</a>
+    <button @click="onClickDialog">openDialog</button>
+    <a href="https://m.facebook.com/messages/compose?ids=sellde.vn">
+      messenger mobile test
+    </a>
 
-    <div class="strollImages">
-      <!-- <div
-        class="imageWrapper"
-        v-for="(item, index) in images"
-        :key="`images_${index}`"
-        :id="index"
-      > -->
+    <!-- <v-row justify="center">
+      <v-dialog
+        v-model="dialog"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" dark v-bind="attrs" v-on="on">
+            Open Dialog
+          </v-btn>
+        </template>
+        <v-card>
+          <v-toolbar dark color="primary">
+            <v-btn icon dark @click="dialog = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <v-toolbar-title>Settings</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+              <v-btn dark text @click="dialog = false"> Save </v-btn>
+            </v-toolbar-items>
+          </v-toolbar>
+          <v-list three-line subheader>
+            <v-subheader>User Controls</v-subheader>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>Content filtering</v-list-item-title>
+                <v-list-item-subtitle
+                  >Set the content filtering level to restrict apps that can be
+                  downloaded</v-list-item-subtitle
+                >
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>Password</v-list-item-title>
+                <v-list-item-subtitle
+                  >Require password for purchase or use password to restrict
+                  purchase</v-list-item-subtitle
+                >
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+          <v-divider></v-divider>
+          <v-list three-line subheader>
+            <v-subheader>General</v-subheader>
+            <v-list-item>
+              <v-list-item-action>
+                <v-checkbox v-model="notifications"></v-checkbox>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Notifications</v-list-item-title>
+                <v-list-item-subtitle
+                  >Notify me about updates to apps or games that I
+                  downloaded</v-list-item-subtitle
+                >
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-checkbox v-model="sound"></v-checkbox>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Sound</v-list-item-title>
+                <v-list-item-subtitle
+                  >Auto-update apps at any time. Data charges may
+                  apply</v-list-item-subtitle
+                >
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-checkbox v-model="widgets"></v-checkbox>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Auto-add widgets</v-list-item-title>
+                <v-list-item-subtitle
+                  >Automatically add home screen widgets</v-list-item-subtitle
+                >
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-dialog>
+    </v-row> -->
+    <!-- <v-dialog v-model="isDialog">
       <div @touchstart="onTouchStart(1)" @touchend="onTouchEnd">
         <img class="rounded-lg" src="./mac.png" />
       </div>
@@ -25,8 +111,31 @@
       <div>
         <img class="rounded-lg" src="./category.png" />
       </div>
-      <!-- </div> -->
-    </div>
+    </v-dialog> -->
+
+    <!-- <div
+        class="imageWrapper"
+        v-for="(item, index) in images"
+        :key="`images_${index}`"
+        :id="index"
+      > -->
+    <!-- <div class="strollImages">
+      <div @touchstart="onTouchStart(1)" @touchend="onTouchEnd">
+        <img class="rounded-lg" src="./mac.png" />
+      </div>
+      <div @touchstart="onTouchStart(2)" @touchend="onTouchEnd">
+        <img class="rounded-lg" src="./mac.png" />
+      </div>
+      <div @touchstart="onTouchStart(3)" @touchend="onTouchEnd">
+        <img class="rounded-lg" src="./mac.png" />
+      </div>
+      <div>
+        <img class="rounded-lg" src="./category.png" />
+      </div>
+      <div>
+        <img class="rounded-lg" src="./category.png" />
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -36,9 +145,22 @@ export default {
     return {
       event: "",
       changedTouches: "",
+      isDialog: false,
+      dialog: true,
     };
   },
   methods: {
+    onClickDialog() {
+      // console.log("click");
+      // if (mobile) {
+      //   <a href="https://m.facebook.com/messages/compose?ids=USER_NAME_OR_ID">
+      //     messenger mobile test
+      //   </a>;
+      // } else {
+      //  ;
+      // }
+      // this.isDialog = true;
+    },
     // onTouch() {
     //   imgEl.addEventListener("touchforcechange", "onTouchForceChange", false);
 

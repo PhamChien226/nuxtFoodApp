@@ -19,6 +19,11 @@ export default {
     Lab2,
     AppRestaurantInfo,
   },
+  data() {
+    return {
+      dialog: true,
+    };
+  },
 
   computed: {
     ...mapState(["fooddata"]),
