@@ -16,7 +16,9 @@
     <pre>isFAcebook: {{ isFacebook }}</pre>
 
     <div id="foz" data-href="https://supply.sellde.vn/">Supply Sellde</div>
-    <div id="custom" data-href="https://supply.sellde.vn/">Supply Sellde</div>
+    <div id="custom" @click="test1">test1</div>
+
+    <div id="custom" @click="test2">open chrome</div>
 
     <!-- <v-row justify="center">
       <v-dialog
@@ -172,6 +174,28 @@ export default {
       // }
       // this.isDialog = true;
     },
+    test1() {
+      window.open("https://supply.sellde.vn/", "_system");
+    },
+    test2() {
+      window.open("https://supply.sellde.vn/", "_system");
+
+      // if (/android/i.test(navigator.userAgent)) {
+      //   evt.preventDefault();
+
+      // var url = $(this).attr('href').replace("https://", "googlechromes://");
+      // url = url.replace("http://", "googlechrome://");
+      window.open("googlechrome://supply.sellde.vn/", "_blank");
+
+      // return false;
+      // }
+
+      // if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      //   // Safari doest have URI scheme...
+      // }
+
+      // });
+    },
     // onTouch() {
     //   imgEl.addEventListener("touchforcechange", "onTouchForceChange", false);
 
@@ -217,7 +241,7 @@ export default {
     document.getElementById("foz").addEventListener(
       "click",
       function (evt) {
-        console.log("mounted function")
+        console.log("mounted function");
         var a = document.createElement("a");
         a.setAttribute("href", this.getAttribute("data-href"));
         a.setAttribute("target", "_blank");
@@ -225,7 +249,13 @@ export default {
         var dispatch = document.createEvent("HTMLEvents");
         dispatch.initEvent("click", true, true);
         // a.dispatchEvent(dispatch);
-        a.dispatchEvent(new MouseEvent("click", {'view': window, 'bubbles': true, 'cancelable': true}))
+        a.dispatchEvent(
+          new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+          })
+        );
       },
       false
     );
