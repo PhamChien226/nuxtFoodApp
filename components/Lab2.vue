@@ -16,6 +16,7 @@
     <pre>isFAcebook: {{ isFacebook }}</pre>
 
     <div id="foz" data-href="https://supply.sellde.vn/">Supply Sellde</div>
+    <div id="custom" data-href="https://supply.sellde.vn/">Supply Sellde</div>
 
     <!-- <v-row justify="center">
       <v-dialog
@@ -216,16 +217,32 @@ export default {
     document.getElementById("foz").addEventListener(
       "click",
       function (evt) {
+        console.log("mounted function")
         var a = document.createElement("a");
         a.setAttribute("href", this.getAttribute("data-href"));
-        a.setAttribute("target", "_blank");
+        // a.setAttribute("target", "_blank");
 
         var dispatch = document.createEvent("HTMLEvents");
         dispatch.initEvent("click", true, true);
-        a.dispatchEvent(dispatch);
+        // a.dispatchEvent(dispatch);
+        a.dispatchEvent(new MouseEvent("click", {'view': window, 'bubbles': true, 'cancelable': true}))
       },
       false
     );
+
+    // document.getElementById("custom").addEventListener(
+    //   "click",
+    //   function (evt) {
+    //     var a = document.createElement("a");
+    //     a.setAttribute("href", this.getAttribute("data-href"));
+    //     a.setAttribute("target", "_blank");
+
+    //     var dispatch = document.createEvent("HTMLEvents");
+    //     dispatch.initEvent("click", true, true);
+    //     a.dispatchEvent(dispatch);
+    //   },
+    //   false
+    // );
   },
 
   created() {
