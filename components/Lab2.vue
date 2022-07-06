@@ -16,11 +16,12 @@
     <pre>isFAcebook: {{ isFacebook }}</pre>
 
     <div id="foz" data-href="https://supply.sellde.vn/">Supply Sellde</div>
-    <div @click="test1">test1</div>
+    <button @click="test1">window.open</button>
 
-    <div @click="test2">open chrome</div>
-    <div @click="test3">safari domain</div>
+    <button @click="test2">open chrome</button>
     <button @click="test4">gg chrome 2</button>
+    <button @click="test5">gg chrome 3</button>
+    <button @click="test3">safari domain</button>
 
     <!-- <v-row justify="center">
       <v-dialog
@@ -186,15 +187,15 @@ export default {
       // var url = $(this).attr('href').replace("https://", "googlechromes://");
       // url = url.replace("http://", "googlechrome://");
       window.open("googlechrome://supply.sellde.vn", "_blank");
-
     },
     test3() {
       window.open("safari-https://supply.sellde.vn/", "_blank");
-
     },
     test4() {
       window.open("googlechrome://navigate?url=supply.sellde.vn", "_blank");
-
+    },
+    test5() {
+      window.location.href = "googlechrome://navigate?url=supply.sellde.vn";
     },
     // onTouch() {
     //   imgEl.addEventListener("touchforcechange", "onTouchForceChange", false);
