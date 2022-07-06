@@ -20,6 +20,7 @@
 
     <div @click="test2">open chrome</div>
     <div @click="test3">safari domain</div>
+    <button @click="test4">gg chrome 2</button>
 
     <!-- <v-row justify="center">
       <v-dialog
@@ -184,17 +185,15 @@ export default {
 
       // var url = $(this).attr('href').replace("https://", "googlechromes://");
       // url = url.replace("http://", "googlechrome://");
-      window.open("googlechrome://supply.sellde.vn/", "_blank");
+      window.open("googlechrome://supply.sellde.vn", "_blank");
 
     },
     test3() {
-
-      // if (/android/i.test(navigator.userAgent)) {
-      //   evt.preventDefault();
-
-      // var url = $(this).attr('href').replace("https://", "googlechromes://");
-      // url = url.replace("http://", "googlechrome://");
       window.open("safari-https://supply.sellde.vn/", "_blank");
+
+    },
+    test4() {
+      window.open("googlechrome://navigate?url=supply.sellde.vn", "_blank");
 
     },
     // onTouch() {
