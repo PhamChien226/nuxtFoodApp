@@ -9,6 +9,12 @@
       messenger mobile test
     </a>
 
+    <a href="https://supply.sellde.vn/" rel="PDF link" target="_blank"
+      >Link Text</a
+    >
+    <pre>{{ userAgent }}</pre>
+    <pre>isFAcebook: {{ isFacebook }}</pre>
+
     <!-- <v-row justify="center">
       <v-dialog
         v-model="dialog"
@@ -147,6 +153,8 @@ export default {
       changedTouches: "",
       isDialog: false,
       dialog: true,
+      userAgent: null,
+      isFacebook: false,
     };
   },
   methods: {
@@ -200,6 +208,14 @@ export default {
     onTouchEnd() {
       alert("touch end");
     },
+  },
+
+  created() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    this.userAgent = ua;
+    if (ua.indexOf("FBAN") > -1 && ua.indexOf("FBAV") > -1) {
+      this.isFacebook = true;
+    }
   },
 
   // mounted() {
