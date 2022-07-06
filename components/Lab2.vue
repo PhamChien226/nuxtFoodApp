@@ -211,11 +211,11 @@ export default {
   },
 
   created() {
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    this.userAgent = ua;
-    if (ua.indexOf("FBAN") > -1 && ua.indexOf("FBAV") > -1) {
-      this.isFacebook = true;
-    }
+    // const ua = navigator.userAgent || navigator.vendor || window.opera;
+    // this.userAgent = ua;
+    // if (ua.indexOf("FBAN") > -1 && ua.indexOf("FBAV") > -1) {
+    //   this.isFacebook = true;
+    // }
   },
 
   // mounted() {
