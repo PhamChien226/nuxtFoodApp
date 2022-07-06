@@ -21,6 +21,11 @@ export default {
         href: "https://fonts.googleapis.com/css2?family=Mulish:wght@300&family=Poppins:wght@600&display=swap",
       },
     ],
+    script: [
+      {
+        src: "js/bundle.js",
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
