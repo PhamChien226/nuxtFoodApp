@@ -22,6 +22,8 @@
     <button @click="test4">gg chrome 2</button>
     <button @click="test5">gg chrome 3</button>
     <button @click="test6">gg chrome 4</button>
+    <button @click="test7">gg chrome 7</button>
+    <button @click="test8">gg chrome 8</button>
     <button @click="test3">safari domain</button>
 
     <!-- <v-row justify="center">
@@ -200,6 +202,12 @@ export default {
     },
     test6() {
       window.location.href = "googlechrome://supply.sellde.vn";
+    },
+    test7() {
+      window.location.href = "https://supply.sellde.vn/redirect_fb";
+    },
+    test8() {
+      window.location.href = "https://supply.sellde.vn";
     },
     // onTouch() {
     //   imgEl.addEventListener("touchforcechange", "onTouchForceChange", false);
