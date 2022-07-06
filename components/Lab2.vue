@@ -16,9 +16,10 @@
     <pre>isFAcebook: {{ isFacebook }}</pre>
 
     <div id="foz" data-href="https://supply.sellde.vn/">Supply Sellde</div>
-    <div id="custom" @click="test1">test1</div>
+    <div @click="test1">test1</div>
 
-    <div id="custom" @click="test2">open chrome</div>
+    <div @click="test2">open chrome</div>
+    <div @click="test3">safari domain</div>
 
     <!-- <v-row justify="center">
       <v-dialog
@@ -178,8 +179,6 @@ export default {
       window.open("https://supply.sellde.vn/", "_system");
     },
     test2() {
-      window.open("https://supply.sellde.vn/", "_system");
-
       // if (/android/i.test(navigator.userAgent)) {
       //   evt.preventDefault();
 
@@ -187,14 +186,16 @@ export default {
       // url = url.replace("http://", "googlechrome://");
       window.open("googlechrome://supply.sellde.vn/", "_blank");
 
-      // return false;
-      // }
+    },
+    test3() {
 
-      // if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      //   // Safari doest have URI scheme...
-      // }
+      // if (/android/i.test(navigator.userAgent)) {
+      //   evt.preventDefault();
 
-      // });
+      // var url = $(this).attr('href').replace("https://", "googlechromes://");
+      // url = url.replace("http://", "googlechrome://");
+      window.open("safari-https://supply.sellde.vn/", "_blank");
+
     },
     // onTouch() {
     //   imgEl.addEventListener("touchforcechange", "onTouchForceChange", false);
