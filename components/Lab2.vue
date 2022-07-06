@@ -21,6 +21,7 @@
     <button @click="test2">open chrome</button>
     <button @click="test4">gg chrome 2</button>
     <button @click="test5">gg chrome 3</button>
+    <button @click="test6">gg chrome 4</button>
     <button @click="test3">safari domain</button>
 
     <!-- <v-row justify="center">
@@ -196,6 +197,9 @@ export default {
     },
     test5() {
       window.location.href = "googlechrome://navigate?url=supply.sellde.vn";
+    },
+    test6() {
+      window.location.href = "googlechrome://supply.sellde.vn";
     },
     // onTouch() {
     //   imgEl.addEventListener("touchforcechange", "onTouchForceChange", false);
