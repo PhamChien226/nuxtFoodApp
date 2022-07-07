@@ -24,6 +24,8 @@
     <button @click="test6">gg chrome 4</button>
     <button @click="test7">gg chrome 7</button>
     <button @click="test8">gg chrome 8</button>
+    <a href="googlechrome://supply.sellde.vn/">chrome with a tag</a>
+
     <button @click="test3">safari domain</button>
 
     <!-- <v-row justify="center">
