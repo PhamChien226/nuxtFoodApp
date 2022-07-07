@@ -25,6 +25,7 @@
     <button @click="test7">gg chrome 7</button>
     <button @click="test8">gg chrome 8</button>
     <a href="googlechrome://supply.sellde.vn/">chrome with a tag</a>
+    <a href="googlechrome://supply.sellde.vn/" target="_blank">chrome with a tag and blank</a>
 
     <button @click="test3">safari domain</button>
 
@@ -197,10 +198,10 @@ export default {
       window.open("safari-https://supply.sellde.vn/", "_blank");
     },
     test4() {
-      window.open("googlechrome://navigate?url=supply.sellde.vn", "_blank");
+      window.open("googlechrome://navigate?url=https://supply.sellde.vn", "_blank");
     },
     test5() {
-      window.location.href = "googlechrome://navigate?url=supply.sellde.vn";
+      window.location.href = "googlechrome://navigate?url=https://supply.sellde.vn";
     },
     test6() {
       window.location.href = "googlechrome://supply.sellde.vn";
